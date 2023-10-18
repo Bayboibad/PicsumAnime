@@ -5,7 +5,7 @@ var admin = require("firebase-admin");
 const path = require('path');
 
 const multer = require('multer');
-var serviceAccount = require("../node_modules/to/serviceAccountKey.json");
+var serviceAccount = require("../path/to/serviceAccountKey.json");
 var upload = multer({ dest: 'uploads/' });
 // Khởi tạo Firebase Admin SDK
 admin.initializeApp({
