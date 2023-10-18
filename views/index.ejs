@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Quản lý web</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .custom-color {
+            background-color: #004d4c !important;
+        }
+
+        .list-group-item:hover {
+            background-color: #004d4c !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark custom-color">
+        <a class="navbar-brand" href="#">
+            Picsum Photo
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Vertical Tabs -->
+            <div class="col-md-3 col-12">
+                <div class="list-group" id="v-pills-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="v-pills-add-tab" data-toggle="pill"
+                        href="#v-pills-add" role="tab">Thêm sản phẩm</a>
+                    <a class="list-group-item list-group-item-action" id="v-pills-products-tab" data-toggle="pill"
+                        href="#v-pills-products" role="tab">Quản lý sản phẩm</a>
+                    <a class="list-group-item list-group-item-action" id="v-pills-users-tab" data-toggle="pill"
+                        href="#v-pills-users" role="tab">Quản lý người dùng</a>
+                </div>
+            </div>
+
+            <!-- Tabs Content -->
+            <div class="col-md-9 col-12">
+                <div class="tab-content" id="v-pills-tabContent">
+
+                    <div class="tab-pane fade show active" id="v-pills-add" role="tabpanel">
+                        <!-- Thêm sản phẩm -->
+                        <h2>Thêm sản phẩm</h2>
+                        <form action="/addProduct" method="post" enctype="multipart/form-data" >
+                            <div class="form-group">
+                                <label for="productName">Tên sản phẩm</label>
+                                <input type="text" class="form-control" id="productName" name="productName1"
+                                    placeholder="Nhập tên sản phẩm" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" name="avatar1" id="productImage" accept=".jpg, .jpeg, .png" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productDescription">Mô tả sản phẩm</label>
+                                <textarea class="form-control" id="productDescription" name="productDescription1"
+                                    rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="v-pills-products" role="tabpanel">
+                        <!-- Quản lý sản phẩm -->
+                        <h2>Quản lý sản phẩm</h2>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên</th>
+                                    <th>Ảnh</th>
+                                    <th>Mô tả</th>
+                                    <th>Số lượng ảnh</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% let index = 1; %>
+                                <% data.forEach((item) => { %>
+                                    <tr>
+                                        <td><%= index %></td>
+                                        <td><%= item.productName %></td>
+                                        <td><img width="120px" height="80px" src="<%= item.avatarFile %>" alt="<%= item.productName %>"></td>
+                                        <td><%= item.productDescription %></td>
+                                        <td>1</td> <!-- Chú ý: Bạn cũng có thể muốn thay thế số cứng này bằng số lượng thực sự của sản phẩm -->
+                                        <td>
+                                            <button class="btn btn-primary">Sửa</button>
+                                            <button class="btn btn-danger" style="color: white;"><a href="/deleteProduct/<%= item.id %>">Xóa</a></button>
+                                        </td>
+                                    </tr>
+                                <% index++; %>
+                                <% }) %>
+                            </tbody>
+                            
+                        </table>
+                    </div>
+
+                    <div class="tab-pane fade" id="v-pills-users" role="tabpanel">
+                        <!-- Quản lý người dùng -->
+                        <h2>Quản lý người dùng</h2>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Họ tên</th>
+                                    <th>Mật khẩu</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Người dùng A</td>
+                                    <td>******</td>
+                                    <td>Hoạt động</td>
+                                    <td>
+                                        <button class="btn btn-primary">Sửa</button>
+                                        <button class="btn btn-danger">Xóa</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
